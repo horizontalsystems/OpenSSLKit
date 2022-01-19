@@ -1,0 +1,11 @@
+framework module OpenSSL {
+  umbrella header "OpenSSL.h"
+
+  export *
+  module * { export * }
+}
+
+module OpenSSL.Swift {
+    header "OpenSSL-Swift.h"
+    requires objc
+}

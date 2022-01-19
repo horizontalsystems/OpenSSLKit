@@ -1,0 +1,95 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.5.2 (swiftlang-1300.0.47.5 clang-1300.0.29.30)
+// swift-module-flags: -target x86_64-apple-ios13.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name OpenSSL
+import Foundation
+@_exported import OpenSSL
+import Swift
+import _Concurrency
+extension Swift.Array {
+  public init(reserveCapacity: Swift.Int)
+}
+extension Foundation.Data {
+  public func xor(with key: Foundation.Data) -> Foundation.Data
+  public func copy() -> Foundation.Data
+}
+public struct Kit {
+  public enum CryptoKitError : Swift.Error {
+    case signFailed
+    case noEnoughSpace
+    public static func == (a: OpenSSL.Kit.CryptoKitError, b: OpenSSL.Kit.CryptoKitError) -> Swift.Bool
+    public func hash(into hasher: inout Swift.Hasher)
+    public var hashValue: Swift.Int {
+      get
+    }
+  }
+  public static func ecdhAgree(privateKey: Foundation.Data, withPublicKey publicKey: Foundation.Data) -> Foundation.Data
+  public static func sha256(_ data: Foundation.Data) -> Foundation.Data
+  public static func sha256sha256(_ data: Foundation.Data) -> Foundation.Data
+  public static func sha3(_ data: Foundation.Data) -> Foundation.Data
+  public static func ripemd160(_ data: Foundation.Data) -> Foundation.Data
+  public static func sha256ripemd160(_ data: Foundation.Data) -> Foundation.Data
+  public static func hmacsha512(data: Foundation.Data, key: Foundation.Data) -> Foundation.Data
+  public static func scrypt(pass: Foundation.Data) -> Foundation.Data
+  public static func deriveKey(password: Foundation.Data, salt: Foundation.Data, iterations: Swift.Int, keyLength: Swift.Int) -> Foundation.Data
+  public static func derivedHDKey(hdKey: OpenSSL.HDKey, at: Swift.UInt32, hardened: Swift.Bool) -> OpenSSL.HDKey?
+}
+public struct HDKey {
+  public let privateKey: Foundation.Data?
+  public let publicKey: Foundation.Data?
+  public let chainCode: Foundation.Data
+  public let depth: Swift.UInt8
+  public let fingerprint: Swift.UInt32
+  public let childIndex: Swift.UInt32
+  public init(privateKey: Foundation.Data?, publicKey: Foundation.Data?, chainCode: Foundation.Data, depth: Swift.UInt8, fingerprint: Swift.UInt32, childIndex: Swift.UInt32)
+}
+public protocol BinaryConvertible {
+  static func + (lhs: Foundation.Data, rhs: Self) -> Foundation.Data
+  static func += (lhs: inout Foundation.Data, rhs: Self)
+}
+extension OpenSSL.BinaryConvertible {
+  public static func + (lhs: Foundation.Data, rhs: Self) -> Foundation.Data
+  public static func += (lhs: inout Foundation.Data, rhs: Self)
+}
+extension Swift.UInt8 : OpenSSL.BinaryConvertible {
+}
+extension Swift.UInt16 : OpenSSL.BinaryConvertible {
+}
+extension Swift.UInt32 : OpenSSL.BinaryConvertible {
+}
+extension Swift.UInt64 : OpenSSL.BinaryConvertible {
+}
+extension Swift.Int8 : OpenSSL.BinaryConvertible {
+}
+extension Swift.Int16 : OpenSSL.BinaryConvertible {
+}
+extension Swift.Int32 : OpenSSL.BinaryConvertible {
+}
+extension Swift.Int64 : OpenSSL.BinaryConvertible {
+}
+extension Swift.Int : OpenSSL.BinaryConvertible {
+}
+extension Swift.Bool : OpenSSL.BinaryConvertible {
+  public static func + (lhs: Foundation.Data, rhs: Swift.Bool) -> Foundation.Data
+}
+extension Swift.String : OpenSSL.BinaryConvertible {
+  public static func + (lhs: Foundation.Data, rhs: Swift.String) -> Foundation.Data
+}
+extension Foundation.Data : OpenSSL.BinaryConvertible {
+  public static func + (lhs: Foundation.Data, rhs: Foundation.Data) -> Foundation.Data
+}
+@_hasMissingDesignatedInitializers final public class Sha3 {
+  public static func keccak256(_ data: Foundation.Data) -> Foundation.Data
+  @objc deinit
+}
+public class KeccakDigest {
+  public init()
+  public func update(with data: Foundation.Data)
+  public func digest() -> Foundation.Data
+  @objc deinit
+}
+public struct Base58 {
+  public static func encode(_ bytes: Foundation.Data) -> Swift.String
+  public static func decode(_ base58: Swift.String) -> Foundation.Data
+}
+extension OpenSSL.Kit.CryptoKitError : Swift.Equatable {}
+extension OpenSSL.Kit.CryptoKitError : Swift.Hashable {}
